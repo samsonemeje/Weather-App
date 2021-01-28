@@ -1,3 +1,8 @@
+window.addEventListener('load', (event) => {
+	console.log('page is fully loaded');
+	registerSW();
+});
+
 const searchForm = document.querySelector('.search-location');
 
 const cityValue = document.querySelector('.search-location input');
@@ -96,3 +101,13 @@ searchForm.addEventListener('submit', (event) => {
 			console.log(error);
 		});
 });
+
+async function registerSW() {
+	if ('serviceWorker' in navigator) {
+		try {
+			await navigator.serviceWorker.register('./sw.js');
+		} catch (e) {
+			console.log('SW registration failed');
+		}
+	}
+}
